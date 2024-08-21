@@ -6,7 +6,7 @@ body {
 }
 
 .sidenav {
-    background-color: var(--color-surface-200); /* Black*/
+    background-color: white; opacity: 30%;
     width: 200px;
     height: 100%;
     position: fixed; top: 0px; left: 0px;
