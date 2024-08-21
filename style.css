@@ -20,4 +20,6 @@ body {
     display: block;
     border-radius: 10px;
     cursor: pointer;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: black;
   }
