@@ -1,3 +1,7 @@
+body {
+    background-color: #FDDA0D;
+}
+
 .sidenav {
     background-color: var(--color-surface-200); /* Black*/
     width: 200px;
