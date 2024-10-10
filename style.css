@@ -6,8 +6,8 @@ body {
 }
 
 .sidenav {
-    background-color: white; opacity: 30%;
-    width: 200px;
+    background-color: #ffe479;
+    width: 150px;
     height: 100%;
     position: fixed; top: 0px; left: 0px;
     margin: auto;
@@ -15,14 +15,35 @@ body {
   }
   
   /* The navigation menu links */
-  .sidenav a {
-    padding: 10%;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
+.sidenav a {
+    padding: 20px;
+    text-decoration: none; color: black;
+    font-size: 28px;
     display: block;
     border-radius: 10px;
     cursor: pointer;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-  }
+    text-align: center;
+    position: relative; top: 300px;
+}
+
+.infobox {
+    display: flex;           /* Makes the container a flex container */
+    align-items: center;     /* Vertically align the text with the image */
+    position: fixed; left: 250px; top: 300px;
+}
+
+.infobox img {
+    margin-right: 20px; /* Adds space between the image and text */
+    border-radius: 10px;
+    width: 300px; height: 300px; object-fit: cover;
+}
+
+.infobox p {
+    margin: 0; /* Removes default margins for a cleaner look */
+    position: relative; bottom: 120px;
+}
+
+.infobox h1 {
+    margin: 0;
+    position: relative; bottom: 120px;
+}
