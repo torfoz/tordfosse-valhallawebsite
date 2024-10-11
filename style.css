@@ -3,8 +3,9 @@
 }
 
 body {
-    font-family: "New Amsterdam", sans-serif;
-    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
     font-style: normal;
     background-color: #FDDA0D;
 }
@@ -20,15 +21,16 @@ body {
   
   /* The navigation menu links */
 .sidenav a {
-    padding: 20px;
+    padding-top: 20px; padding-bottom: 20px;
     text-decoration: none; color: black;
-    font-size: 28px;
+    font-size: 20px;
     display: block;
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
     position: relative; top: 300px;
-    margin: 10px;
+    margin-top: 15px;
+    font-weight: 800;
 
 }
 
@@ -40,8 +42,7 @@ a:hover {
 .infobox {
     display: flex;           /* Makes the container a flex container */
     align-items: center;     /* Vertically align the text with the image */
-    position: fixed; left: 300px; top: 300px;
-    width: 1000px;
+    position: fixed; left: 250px; top: 300px; right: 200px;
 }
 
 .infobox img {
@@ -52,16 +53,19 @@ a:hover {
 
 .infobox p {
     margin: 0; /* Removes default margins for a cleaner look */
-    position: relative; bottom: 80px;
     font-family: "Roboto", sans-serif;
+    position: relative;
     font-weight: 500;
     font-style: normal;
-    line-height: 25px
+    line-height: 30px
 }
 
 .infobox h1 {
     margin: 0;
-    position: relative; bottom: 80px;
+}
+
+.text {
+    position: absolute; top: 0; left: 370px;
 }
 
 /*Tidslinje*/
@@ -80,7 +84,7 @@ a:hover {
     width: 6px;
     background-color: white;
     top: 0;
-    bottom: 0;
+    bottom: -600px;
     left: 50%;
     margin-left: -3px;
 }
@@ -126,6 +130,7 @@ a:hover {
     width: 0;
     z-index: 1;
     right: 30px;
+    border: medium solid white;
     border-width: 10px 0 10px 10px;
     border-color: transparent transparent transparent white;
 }
@@ -139,6 +144,7 @@ a:hover {
     width: 0;
     z-index: 1;
     left: 30px;
+    border: medium solid white;
     border-width: 10px 10px 10px 0;
     border-color: transparent white transparent transparent;
 }
