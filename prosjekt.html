@@ -5,12 +5,17 @@
   <title>Tord Fosse</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤙</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤙</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet">
+  <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet">
 </head>
 
 <body>
@@ -18,18 +23,244 @@
   <a href="index.html">OM</a>
   <a href="tidslinje.html">ERFARING</a>
   <a href="prosjekt.html">PROSJEKT</a>
+  <a href="ovinger.html">ØVINGER</a>
 </div>
-
+<div class="topbox"></div>
 <div class="infobox">
-  <img src="lego.png" alt="Profil">
+  <img src="img/python.png" alt="Profil" class="shaddow">
   <div class="text">
-    <h1>Teambasert samhandling - Legoprosjekt</h1>
+    <h1>Teambasert samhandling</h1>
     <br>
-    <p>I faget teambasert samhandling har jeg jobbet sammen med en gruppe, der vi designer, koder og tester ut forskjellige oppgaver
-    med en lego mindstorm robot. Gjennom oppgavene har vi lært å bruke GitLab som et verktøy for å dokumentere fremdriften av oppgavene. Dette har vi gjort med en issueboard.
-    Vi har også brukt gitlab til å laste opp koden med git for å holde den oppdatert. I oppgavene har jeg jobbet mest med kodingen av programmene og feilsøking. Dette har jeg gjort via å lese og forstå dokumentasjonen for ev3 python.
-    Jeg har også bidratt med noe legobygging og hjulpet gruppen med bruken av git. Videre har jeg også tilegnet meg mer erfaring innen gruppearbeid, der jeg har vært behjelpelig med å høre og komme på nye ideer.
-    Jeg har også lært å samhandle med andre via kodingen.</p>
+    <p>I faget teambasert samhandling har jeg jobbet sammen med en gruppe, der vi designer, koder og
+      tester ut forskjellige oppgaver
+      med en lego mindstorm robot. Gjennom oppgavene har vi lært å bruke GitLab som et verktøy for å
+      dokumentere fremdriften av oppgavene. Dette har vi gjort med en issueboard.
+      Vi har også brukt gitlab til å laste opp koden med git for å holde den oppdatert. I oppgavene
+      har jeg jobbet mest med kodingen av programmene og feilsøking. Dette har jeg gjort via å lese
+      og forstå dokumentasjonen for ev3 python.
+      Jeg har også bidratt med noe legobygging og hjulpet gruppen med bruken av git. Videre har jeg
+      også tilegnet meg mer erfaring innen gruppearbeid, der jeg har vært behjelpelig med å høre og
+      komme på nye ideer.
+      Jeg har også lært å samhandle med andre via kodingen.</p>
   </div>
 </div>
+<div class="midbox"></div>
+<div class="infobox">
+  <div class="text">
+    <h1>Legoprosjekt</h1>
+    <br>
+    <p>Prosjektoppgaven gikk ut på å lage en robot, der gruppen skulle ta i bruk læring fra
+      tidligere oppgaver. Roboten skulle også være samfunnsnyttig. Vi bestemte oss derfor for å lage
+      en brobyggerrobbot kalt SpanX. Gjennom dette prosjektet har jeg fått mer erfaring innenfor
+      samarbeid og kommunikasjon med et team, der vi har støtt på ulike problemer og utfordringer. I
+      prosjektet bidro jeg for det meste med koding av drive- og mainklasse for roboten. Jeg bidro
+      også med å ferdigstille og dokumentere koden, samt feilsøke og teste koden. I rapporten bidro
+      jeg med å skrive om kodeprosessen.
+    </p>
+  </div>
+  <img src="img/lego.png" alt="Profil">
+</div>
+<div class="midbox"></div>
+<div class="infobox">
+  <div class="text"><h2>Kode</h2>
+  </div>
+</div>
+<div class="infobox">
+  <div class="dropdown">
+    <button onclick="toggleDropdown()">Main.py</button>
+    <div class="dropdown-content">
+        <pre>
+#!/usr/bin/env pybricks-micropython
+from Drive import Drive
+from BuildBridge import BuildBridge
+
+# Klasse for hovedprogrammet
+class Main:
+    drive = Drive()
+    # Setter verdier for opp og ned
+    up = 1
+    down = 0
+    # Så lenge ultrasonisk sensoren ser bakken, kjører roboten fremover
+    # Hvis sensoren ser et fall, bygger roboten en bro
+    while True:
+        if drive.ultrasonic_sensor.distance() > drive.ultrasonic_distance:
+            drive.align()
+            drive.rotate_180()
+            drive.drive_backward(1.3)
+            bridge = BuildBridge(down)
+            bridge.build_bridge(500)
+            drive.drive_forward(1)
+            bridge = BuildBridge(up)
+            bridge.build_bridge(500)
+            drive.drive_backward(10.5)
+            drive.rotate_180()
+            bridge = BuildBridge(down)
+            bridge.build_bridge(500)
+            drive.drive_backward(2)
+            bridge = BuildBridge(up)
+            bridge.build_bridge(300)
+            drive.rotate_180()
+        else:
+            drive.drive_forward(0)
+
+# Kjører hovedprogrammet
+if __name__ == "__main__":
+    main = Main()
+
+        </pre>
+    </div>
+  </div>
+</div>
+<div class="infobox">
+  <div class="dropdown">
+    <button onclick="toggleDropdown()">Drive.py</button>
+    <div class="dropdown-content">
+        <pre>from pybricks.ev3devices import Motor, UltrasonicSensor, GyroSensor
+from pybricks.robotics import DriveBase
+from pybricks.parameters import Port, Direction
+import time as t
+
+# Klasse for å kjøre roboten fremover, bakover, rotere og rette opp roboten
+class Drive:
+    # Konstruktør for klassen Drive
+    # Tar inn venstre og høyre motor, ultrasonisk sensor og gyro-sensor
+    def __init__(self):
+        self.left_motor = Motor(Port.D)
+        self.right_motor = Motor(Port.A)
+        self.ultrasonic_sensor = UltrasonicSensor(Port.S3)
+        self.gyro_sensor = GyroSensor(Port.S2, Direction.CLOCKWISE)
+        self.robot = DriveBase(self.left_motor, self.right_motor, 40, 100)
+        self.ultrasonic_distance = 50   # Avstand fra bakken til ultrasonisk sensor
+
+    # Metode for å kjøre roboten fremover
+    # Tar inn tid som parameter og kjører roboten fremover i den tiden
+    # Hvis tiden er mindre enn 0 eller lik, kjører roboten kontinuerlig fremover
+    def drive_forward(self, time):
+        if time > 0:
+            self.robot.drive(100, 0)
+            t.sleep(time)
+            self.robot.stop()
+        else:
+            self.robot.drive(100, 0)
+
+    # Metode for å kjøre roboten bakover
+    def drive_backward(self, time):
+        if time > 0:
+            self.robot.drive(-100, 0)
+            t.sleep(time)
+            self.robot.stop()
+        else:
+            self.robot.drive(-100, 0)
+
+    # Method for aligning the robot
+    def align(self):
+        self.robot.stop()
+        # Hvis roboten ser et fall, snur den seg til den ser bakken igjen
+        while True:
+            if self.ultrasonic_sensor.distance() > self.ultrasonic_distance:
+                self.left_motor.run(50)
+                self.right_motor.run(-50)
+            # Når roboten ser bakken igjen, henter den vinkelen til gyro-sensoren
+            if self.ultrasonic_sensor.distance() < self.ultrasonic_distance:
+                angle = self.gyro_sensor.angle()
+                new_angle = angle
+                print(angle)
+                # Roboten snur seg til den ser rett mot fallkanten
+                while angle < new_angle + 24:
+                    angleCurrent = new_angle - angle
+                    self.left_motor.run(-50)
+                    self.right_motor.run(50)
+                    new_angle = self.gyro_sensor.angle()
+                    print(angleCurrent)
+                self.drive_backward(1)
+                self.robot.stop()
+                break
+
+    # Metode for å rotere roboten 180 grader
+    def rotate_180(self):
+        angle_current = 0
+        angle_start = self.gyro_sensor.angle()
+        while (angle_current < 180):
+            self.left_motor.run(-200)
+            self.right_motor.run(200)
+            angle_current = angle_start - self.gyro_sensor.angle()
+        self.left_motor.stop()
+        self.right_motor.stop()
+        </pre>
+    </div>
+  </div>
+</div>
+<div class="infobox">
+  <div class="dropdown">
+    <button onclick="toggleDropdown()">BuildBridge.py</button>
+    <div class="dropdown-content">
+        <pre>#!/usr/bin/env pybricks-micropython
+from pybricks.ev3devices import Motor
+from pybricks.parameters import Port, Direction
+
+# Klasse for legging og fjerning av bro
+class BuildBridge:
+    # Konstruktør for klassen BuildBridge
+    # Tar inn retning som parameter og setter antall rotasjoner motoren skal gjøre
+    def __init__(self, direction): #initializes all the values, and How fast the motor shoud build
+        if direction == 1:
+            self.motorBuild = Motor(Port.B, Direction.CLOCKWISE)
+        if direction == 0:
+            self.motorBuild = Motor(Port.B, Direction.COUNTERCLOCKWISE)
+        motorRotationsOnBridgeLaid = 22
+        self.motorDegreesOnBridgeLaid = motorRotationsOnBridgeLaid * 360
+
+    # Metode for å bygge bro
+    # Så lenge motoren ikke har rotert det antall gradene som er satt, kjører motoren
+    def build_bridge(self, speed): #Builds the bridge
+        self.motorBuild.reset_angle(0)
+        while self.motorBuild.angle() < self.motorDegreesOnBridgeLaid:
+            self.motorBuild.run(speed)
+        self.motorBuild.stop()
+        </pre>
+    </div>
+  </div>
+</div>
+<div class="infobox">
+  <div class="text"><h2>Dokumenter</h2>
+  </div>
+</div>
+<div class="infobox">
+  <div class="dropdown">
+    <button onclick="toggleDropdown()">Prosjektrapport</button>
+    <div class="dropdown-content">
+      <iframe src="assets/idatt1004_2024_Team15_prosjektrapport.pdf" width="100%" height="1000px"></iframe>
+    </div>
+  </div>
+</div>
+<div class="infobox">
+  <div class="dropdown">
+    <button onclick="toggleDropdown()">Prosjektplan</button>
+    <div class="dropdown-content">
+      <iframe src="assets/prosjektplan_team15.pdf" width="100%" height="1000px"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleDropdown(event) {
+    var button = event.currentTarget;
+    var content = button.nextElementSibling;
+    var backdrop = document.getElementById('backdrop');
+    if (content.style.display === 'block') {
+        content.style.display = 'none';
+        button.classList.remove('active');
+        backdrop.style.display = 'none';
+    } else {
+        content.style.display = 'block';
+        button.classList.add('active');
+        backdrop.style.display = 'block';
+        content.scrollIntoView({ behavior: 'smooth' }); // Scroll to the content
+    }
+}
+
+document.querySelectorAll('.dropdown button').forEach(button => {
+    button.addEventListener('click', toggleDropdown);
+});
+</script>
 </body>
