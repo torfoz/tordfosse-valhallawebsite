@@ -10,9 +10,24 @@ body {
     background-color: #FDDA0D;
 }
 
+button {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 30px;
+}
+.topbox {
+    display: flex;           /* Makes the container a flex container */ /* Vertically align the text with the image */
+    margin: 8.5% auto;
+}
+
+.midbox {
+    display: flex;           /* Makes the container a flex container */ /* Vertically align the text with the image */
+    margin: 2% auto;
+}
 .sidenav {
     background-color: #ffe479;
-    width: 150px;
+    width: 10%;
     height: 100%;
     position: fixed; top: 0; left: 0;
     margin: auto;
@@ -21,34 +36,36 @@ body {
   
   /* The navigation menu links */
 .sidenav a {
-    padding-top: 20px; padding-bottom: 20px;
+    padding-top: 15%; padding-bottom: 15%;
     text-decoration: none; color: black;
     font-size: 20px;
     display: block;
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
-    position: relative; top: 300px;
+    position: relative; top: 27%;
     margin-top: 15px;
+    margin-left: 2px;
     font-weight: 800;
-
 }
 
 a:hover {
     background-color: #FDDA0D; /* #ffca06 */
-    border: 2px solid black;
+    outline: 2px solid black;
 }
 
 .infobox {
     display: flex;           /* Makes the container a flex container */
     align-items: center;     /* Vertically align the text with the image */
-    position: fixed; left: 250px; top: 300px; right: 200px;
+    margin: 0 auto 19% 19%;
+    margin-bottom: 0;
+    width: 70%
 }
 
 .infobox img {
     margin-right: 20px; /* Adds space between the image and text */
     border-radius: 10px;
-    width: 350px; height: 350px; object-fit: cover;
+    width: 350px; height: auto; object-fit: cover;
 }
 
 .infobox p {
@@ -65,9 +82,14 @@ a:hover {
 }
 
 .text {
-    position: absolute; top: 0; left: 370px;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex: 1;
 }
 
+.shaddow {
+    filter: drop-shadow(3px 3px 1px #222);
+}
 /*Tidslinje*/
 
 /* The actual timeline (the vertical ruler) */
@@ -163,5 +185,85 @@ a:hover {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: normal;
+}
+
+.github-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.github-button:hover {
+    background-color: #555;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 30px;
+}
+
+.dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content pre {
+    margin: 0;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ffe479;
+}
+
+.dropdown button {
+    background-color: rgb(255, 221, 62);
+    color: black;
+    outline: 1px solid black;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 100%; /* Make the button take the full width */
+    text-align: left; /* Align text to the left */
+    position: relative; /* Required for positioning the triangle */
+}
+
+.dropdown button:after {
+    content: ' ▼';
+    font-size: 12px;
+    position: absolute;
+    right: 16px; /* Position the triangle on the right side */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dropdown button.active:after {
+    content: ' ▲';
+    font-size: 12px;
+    position: absolute;
+    right: 16px; /* Position the triangle on the right side */
+    top: 50%;
+    transform: translateY(-50%);
 }
 
