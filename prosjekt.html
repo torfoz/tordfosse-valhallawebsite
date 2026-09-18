@@ -22,7 +22,7 @@
 <div class="sidenav">
   <a href="index.html">OM</a>
   <a href="tidslinje.html">ERFARING</a>
-  <a href="prosjekt.html">PROSJEKT</a>
+  <a href="prosjekt.html" aria-current="page">PROSJEKT</a>
   <a href="ovinger.html">ØVINGER</a>
 </div>
 <div class="topbox"></div>
@@ -67,7 +67,7 @@
 </div>
 <div class="infobox">
   <div class="dropdown">
-    <button onclick="toggleDropdown()">Main.py</button>
+    <button type="button" aria-expanded="false">Main.py</button>
     <div class="dropdown-content">
         <pre>
 #!/usr/bin/env pybricks-micropython
@@ -113,7 +113,7 @@ if __name__ == "__main__":
 </div>
 <div class="infobox">
   <div class="dropdown">
-    <button onclick="toggleDropdown()">Drive.py</button>
+    <button type="button" aria-expanded="false">Drive.py</button>
     <div class="dropdown-content">
         <pre>from pybricks.ev3devices import Motor, UltrasonicSensor, GyroSensor
 from pybricks.robotics import DriveBase
@@ -192,7 +192,7 @@ class Drive:
 </div>
 <div class="infobox">
   <div class="dropdown">
-    <button onclick="toggleDropdown()">BuildBridge.py</button>
+    <button type="button" aria-expanded="false">BuildBridge.py</button>
     <div class="dropdown-content">
         <pre>#!/usr/bin/env pybricks-micropython
 from pybricks.ev3devices import Motor
@@ -227,7 +227,7 @@ class BuildBridge:
 </div>
 <div class="infobox">
   <div class="dropdown">
-    <button onclick="toggleDropdown()">Prosjektrapport</button>
+    <button type="button" aria-expanded="false">Prosjektrapport</button>
     <div class="dropdown-content">
       <iframe src="assets/idatt1004_2024_Team15_prosjektrapport.pdf" width="100%" height="1000px"></iframe>
     </div>
@@ -235,7 +235,7 @@ class BuildBridge:
 </div>
 <div class="infobox">
   <div class="dropdown">
-    <button onclick="toggleDropdown()">Prosjektplan</button>
+    <button type="button" aria-expanded="false">Prosjektplan</button>
     <div class="dropdown-content">
       <iframe src="assets/prosjektplan_team15.pdf" width="100%" height="1000px"></iframe>
     </div>
@@ -244,24 +244,18 @@ class BuildBridge:
 </div>
 
 <script>
-function toggleDropdown(event) {
-    var button = event.currentTarget;
-    var content = button.nextElementSibling;
-    var backdrop = document.getElementById('backdrop');
-    if (content.style.display === 'block') {
-        content.style.display = 'none';
-        button.classList.remove('active');
-        backdrop.style.display = 'none';
-    } else {
-        content.style.display = 'block';
-        button.classList.add('active');
-        backdrop.style.display = 'block';
-        content.scrollIntoView({ behavior: 'smooth' }); // Scroll to the content
-    }
-}
+document.querySelectorAll('.dropdown button').forEach((button, index) => {
+    const content = button.nextElementSibling;
+    const contentId = `dropdown-content-${index + 1}`;
 
-document.querySelectorAll('.dropdown button').forEach(button => {
-    button.addEventListener('click', toggleDropdown);
+    content.id = contentId;
+    button.setAttribute('aria-controls', contentId);
+
+    button.addEventListener('click', () => {
+        const isOpen = content.classList.toggle('is-open');
+        button.classList.toggle('active', isOpen);
+        button.setAttribute('aria-expanded', String(isOpen));
+    });
 });
 </script>
 </body>

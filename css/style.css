@@ -1,543 +1,385 @@
-* {
-    box-sizing: border-box;
+:root {
+    --yellow: #f5cc18;
+    --yellow-light: #ffe883;
+    --paper: #fffdf4;
+    --ink: #171713;
+    --muted: #5e5b4d;
+    --orange: #ef704c;
+    --line: rgba(23, 23, 19, 0.16);
+    --shadow: 0 18px 45px rgba(49, 41, 0, 0.13);
+    --sidebar: 220px;
 }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 83% 12%, rgba(255,255,255,.38) 0 5rem, transparent 5.1rem),
+        radial-gradient(circle at 22% 88%, rgba(255,232,131,.5) 0 8rem, transparent 8.1rem),
+        var(--yellow);
     font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 700;
-    font-style: normal;
-    background-color: #FDDA0D;
+    overflow-x: hidden;
 }
 
-button {
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    line-height: 30px;
-}
-.topbox {
-    display: flex;           /* Makes the container a flex container */ /* Vertically align the text with the image */
-    margin: 8.5% auto;
+body::after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    right: -90px;
+    bottom: -90px;
+    width: 240px;
+    height: 240px;
+    border: 2px solid rgba(23,23,19,.16);
+    border-radius: 50%;
 }
 
-.midbox {
-    display: flex;           /* Makes the container a flex container */ /* Vertically align the text with the image */
-    margin: 2% auto;
+::selection { color: var(--paper); background: var(--ink); }
+h1, h2, p { margin-top: 0; }
+h1 {
+    max-width: 16ch;
+    margin-bottom: 1.25rem;
+    font-size: clamp(2rem, 4vw, 4.25rem);
+    line-height: .98;
+    letter-spacing: -.055em;
 }
+h2 { letter-spacing: -.025em; }
+p { color: #35342d; }
+a, button { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+button { font-family: "Roboto", sans-serif; }
+
+/* Navigation */
 .sidenav {
-    background-color: #ffe479;
-    width: 10%;
-    height: 100%;
-    position: fixed; top: 0; left: 0;
-    margin: auto;
-    padding: 0;
-  }
-  
-  /* The navigation menu links */
-.sidenav a {
-    padding-top: 15%; padding-bottom: 15%;
-    text-decoration: none; color: black;
-    font-size: 20px;
-    display: block;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-    position: relative; top: 27%;
-    margin-top: 15px;
-    margin-left: 2px;
-    font-weight: 800;
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 100;
+    display: flex;
+    width: var(--sidebar);
+    padding: 2rem 1.25rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: .55rem;
+    background: rgba(255,245,197,.78);
+    border-right: 1px solid rgba(23,23,19,.12);
+    backdrop-filter: blur(16px);
 }
 
-a:hover {
-    background-color: #FDDA0D; /* #ffca06 */
-    outline: 2px solid black;
+.sidenav::before {
+    content: "TF.";
+    position: absolute;
+    top: 2rem;
+    left: 1.75rem;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -.08em;
 }
+
+.sidenav::after {
+    content: "PORTFOLIO / 2024";
+    position: absolute;
+    bottom: 2rem;
+    left: 1.75rem;
+    color: var(--muted);
+    font-size: .65rem;
+    letter-spacing: .16em;
+}
+
+.sidenav a {
+    position: relative;
+    display: block;
+    padding: .95rem 1rem;
+    overflow: hidden;
+    color: var(--ink);
+    border-radius: 12px;
+    font-size: .86rem;
+    font-weight: 850;
+    letter-spacing: .09em;
+    text-decoration: none;
+    transition: color 180ms ease, transform 180ms ease, background-color 180ms ease;
+}
+
+.sidenav a::after {
+    content: "→";
+    position: absolute;
+    right: 1rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.sidenav a:hover, .sidenav a[aria-current="page"] {
+    color: var(--paper);
+    background: var(--ink);
+    transform: translateX(4px);
+}
+.sidenav a:hover::after, .sidenav a[aria-current="page"]::after { opacity: 1; transform: translateX(0); }
+
+/* General content */
+.topbox { height: clamp(4rem, 10vw, 8rem); }
+.midbox { height: clamp(1.5rem, 4vw, 3.5rem); }
+.bottomBox { height: 7rem; }
 
 .infobox {
-    display: flex;           /* Makes the container a flex container */
-    align-items: center;     /* Vertically align the text with the image */
-    margin: 0 auto 19% 19%;
-    margin-bottom: 0;
-    width: 70%
+    display: flex;
+    width: min(1000px, calc(100% - var(--sidebar) - 8vw));
+    margin: 0 4vw 0 calc(var(--sidebar) + 4vw);
+    padding: clamp(1.25rem, 3vw, 2.6rem);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    background: rgba(255,253,244,.96);
+    border: 1px solid rgba(23,23,19,.12);
+    border-radius: 26px;
+    box-shadow: var(--shadow);
+    animation: rise-in 700ms cubic-bezier(.2,.75,.2,1) both;
 }
+.infobox:nth-of-type(4) { animation-delay: 100ms; }
+.infobox:nth-of-type(6) { animation-delay: 180ms; }
 
 .infobox img {
-    margin-right: 20px; /* Adds space between the image and text */
-    border-radius: 10px;
-    width: 350px; height: auto; object-fit: cover;
+    width: clamp(230px, 32vw, 360px);
+    max-height: 460px;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 var(--ink);
+    transition: transform 350ms cubic-bezier(.2,.75,.2,1), box-shadow 350ms ease;
 }
+.infobox:hover > img { box-shadow: 11px 11px 0 var(--ink); transform: translate(-3px,-3px) rotate(-.5deg); }
+.infobox:nth-of-type(even):hover > img { transform: translate(-3px,-3px) rotate(.5deg); }
 
 .infobox p {
-    margin: 0; /* Removes default margins for a cleaner look */
+    margin-bottom: 1rem;
     font-family: "Roboto", sans-serif;
-    position: relative;
-    font-weight: 500;
-    font-style: normal;
-    line-height: 30px
+    font-size: clamp(1rem, 1.25vw, 1.08rem);
+    font-weight: 400;
+    line-height: 1.75;
 }
+.infobox p:last-child { margin-bottom: 0; }
+.text { min-width: 0; flex: 1; }
+.shaddow { filter: none; }
 
-.infobox h1 {
-    margin: 0;
-}
-
-.text {
-    margin-left: 20px;
-    margin-right: 20px;
-    flex: 1;
-}
-
-.shaddow {
-    filter: drop-shadow(3px 3px 1px #222);
-}
-/*Tidslinje*/
-
-/* The actual timeline (the vertical ruler) */
-.timeline {
-    position: absolute; left: 150px; top: 0; bottom: 0; right: 10px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* The actual timeline (the vertical ruler) */
-.timeline::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    background-color: white;
-    top: 0;
-    bottom: -600px;
-    left: 50%;
-    margin-left: -3px;
-}
-
-/* Container around content */
-.container {
-    padding: 10px 40px; top: 40px;
-    position: relative;
-    background-color: inherit;
-    width: 50%;
-}
-
-/* The circles on the timeline */
-.container::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: -17px;
-    background-color: white;
-    border: 4px solid #FF9F55;
-    top: 15px;
-    border-radius: 50%;
-    z-index: 1;
-}
-
-/* Place the container to the left */
-.left {
-    left: 0;
-}
-
-/* Place the container to the right */
-.right {
-    left: 50%;
-}
-
-/* Add arrows to the left container (pointing right) */
-.left::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    right: 30px;
-    border: medium solid white;
-    border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent white;
-}
-
-/* Add arrows to the right container (pointing left) */
-.right::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    left: 30px;
-    border: medium solid white;
-    border-width: 10px 10px 10px 0;
-    border-color: transparent white transparent transparent;
-}
-
-/* Fix the circle for containers on the right side */
-.right::after {
-    left: -16px;
-}
-
-/* The actual content */
-.content {
-    padding: 20px 30px;
-    background-color: white;
-    position: relative;
-    border-radius: 6px;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
-
+/* Links and accordions */
 .github-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px 5px;
-    font-size: 16px;
-    font-weight: bold;
+    display: inline-flex;
+    min-height: 48px;
+    margin: .5rem .35rem 0 0;
+    padding: .7rem 1.1rem;
+    align-items: center;
+    justify-content: center;
     color: white;
-    background-color: #333;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.github-button:hover {
-    background-color: #555;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    margin: 5px;
+    background: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
     font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    line-height: 30px;
+    font-size: .95rem;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
+.github-button::after { content: "↗"; margin-left: .55rem; }
+.github-button:hover { color: var(--ink); background: var(--paper); box-shadow: 4px 4px 0 var(--ink); transform: translate(-2px,-2px); }
+
+.dropdown { width: 100%; font-family: "Roboto", sans-serif; font-weight: 500; }
+.dropdown button {
+    position: relative;
+    width: 100%;
+    padding: 1rem 3.5rem 1rem 1.25rem;
+    color: var(--ink);
+    background: var(--yellow-light);
+    border: 1px solid var(--ink);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: left;
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.dropdown button::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 1.25rem;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transform: translateY(-52%);
+    transition: transform 250ms ease;
+}
+.dropdown button:hover { background: #ffed9c; box-shadow: 4px 4px 0 var(--ink); transform: translate(-2px,-2px); }
+.dropdown button.active::after { transform: translateY(-52%) rotate(45deg); }
 
 .dropdown-content {
     display: none;
-    position: relative;
-    background-color: #f9f9f9;
-    border-radius: 10px;
     width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    margin-top: .75rem;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(49,41,0,.1);
 }
-
+.dropdown-content.is-open { display: block; animation: accordion-in 300ms ease-out both; }
 .dropdown-content pre {
+    max-height: 600px;
     margin: 0;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #ffe479;
+    padding: 1.25rem;
+    overflow: auto;
+    color: #2c2b24;
+    background: #fff7ce;
+    font-size: .82rem;
+    line-height: 1.55;
 }
+.dropdown-content iframe { display: block; border: 0; }
 
-.dropdown button {
-    background-color: rgb(255, 221, 62);
-    color: black;
-    outline: 1px solid black;
-    border-radius: 10px;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    width: 100%; /* Make the button take the full width */
-    text-align: left; /* Align text to the left */
-    position: relative; /* Required for positioning the triangle */
+/* Timeline */
+.timeline {
+    position: relative;
+    width: min(1000px, calc(100% - var(--sidebar) - 8vw));
+    margin: 0 4vw 6rem calc(var(--sidebar) + 4vw);
+    padding: 4rem 0;
 }
-
-.dropdown button:after {
-    content: ' ▼';
-    font-size: 12px;
+.timeline::after {
+    content: "";
     position: absolute;
-    right: 16px; /* Position the triangle on the right side */
-    top: 50%;
-    transform: translateY(-50%);
+    inset: 0 auto 0 50%;
+    width: 3px;
+    background: rgba(255,253,244,.75);
+    border-radius: 99px;
+    transform: translateX(-50%);
 }
-
-.dropdown button.active:after {
-    content: ' ▲';
-    font-size: 12px;
+.container {
+    position: relative;
+    width: 50%;
+    padding: 0 2.2rem 2.2rem 0;
+    animation: timeline-in 600ms cubic-bezier(.2,.75,.2,1) both;
+}
+.container:nth-child(2) { animation-delay: 70ms; }
+.container:nth-child(3) { animation-delay: 140ms; }
+.container:nth-child(4) { animation-delay: 210ms; }
+.container:nth-child(5) { animation-delay: 280ms; }
+.container:nth-child(6) { animation-delay: 350ms; }
+.container:nth-child(7) { animation-delay: 420ms; }
+.container:nth-child(8) { animation-delay: 490ms; }
+.container.left { left: 0; }
+.container.right { left: 50%; padding: 0 0 2.2rem 2.2rem; }
+.container::after {
+    content: "";
     position: absolute;
-    right: 16px; /* Position the triangle on the right side */
-    top: 50%;
-    transform: translateY(-50%);
+    z-index: 2;
+    top: 1.45rem;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    background: var(--orange);
+    border: 4px solid var(--paper);
+    border-radius: 50%;
+    transition: transform 200ms ease;
 }
+.container.right::after { right: auto; left: -8px; }
+.container:hover::after { transform: scale(1.3); }
+.container::before {
+    content: "";
+    position: absolute;
+    top: 1.45rem;
+    right: 1.6rem;
+    border: 10px solid transparent;
+    border-right: 0;
+    border-left-color: var(--paper);
+}
+.container.right::before { right: auto; left: 1.6rem; border-right: 10px solid var(--paper); border-left: 0; }
+.content {
+    padding: 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(49,41,0,.1);
+    font-family: "Roboto", sans-serif;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.content:hover { box-shadow: 6px 8px 0 rgba(23,23,19,.9); transform: translate(-3px,-3px); }
+.content h2 { margin-bottom: .7rem; font-family: "Montserrat", sans-serif; font-size: clamp(1rem, 1.6vw, 1.25rem); }
+.content p { margin: 0; font-weight: 400; line-height: 1.55; }
 
+@keyframes rise-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes timeline-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes accordion-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
-@media only screen and (max-width: 900px) {
-
+@media (max-width: 900px) {
+    :root { --sidebar: 0px; }
+    body { padding-bottom: 74px; }
     .sidenav {
-        background-color: #ffe479;
+        inset: auto 0 0;
         width: 100%;
-        height: 10%;
-        position: fixed; top: 90%; left: 0;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
+        height: 74px;
+        padding: .55rem;
+        flex-direction: row;
+        gap: .25rem;
+        border-top: 1px solid rgba(23,23,19,.15);
+        border-right: 0;
     }
-
+    .sidenav::before, .sidenav::after, .sidenav a::after { display: none; }
     .sidenav a {
-        text-decoration: none;
-        background-color: #ffe479;
-        color: black;
-        font-size: 100%;
         display: flex;
-        justify-content: center;
+        min-width: 0;
+        padding: .75rem .35rem;
+        flex: 1;
         align-items: center;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-        position: relative; top: 0;
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        font-weight: 800;
-        padding: 0;
-        border-right: 2px solid black;
+        justify-content: center;
+        border-radius: 9px;
+        font-size: clamp(.66rem,2.6vw,.8rem);
+        letter-spacing: .04em;
     }
-    .sidenav a:last-child {
-        border-right: none; /* Remove the border from the last item */
-    }
-
-    a:hover {
-        background-color: #FDDA0D;
-        outline: 2px solid black;
-    }
-
+    .sidenav a:hover, .sidenav a[aria-current="page"] { transform: none; }
+    .topbox { height: 2rem; }
     .infobox {
-        display: revert;
-        align-items: center;
-        margin: 0;
-        width: 100%;
+        width: calc(100% - 2rem);
+        margin: 0 1rem;
+        padding: 1.25rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.75rem;
+        border-radius: 20px;
     }
-
-    .infobox img {
-        display: block;
-        margin: 0 auto 20px;
-        border-radius: 10px;
-        width: 350px;
-        height: auto;
+    .infobox img, .infobox:nth-of-type(even) img {
+        width: 100%;
+        max-height: 390px;
+        order: -1;
         object-fit: cover;
+        box-shadow: 6px 6px 0 var(--ink);
     }
-
-    .infobox p {
-        margin: 5px;
-        font-family: "Roboto", sans-serif;
-        display: flex;
-        font-weight: 500;
-        line-height: 30px;
+    .infobox:hover > img, .infobox:nth-of-type(even):hover > img { box-shadow: 6px 6px 0 var(--ink); transform: none; }
+    .infobox p { line-height: 1.65; }
+    h1 { max-width: none; font-size: clamp(2rem,10vw,3.5rem); }
+    .github-button { display: flex; width: 100%; margin-right: 0; }
+    .dropdown-content pre { font-size: .72rem; }
+    .dropdown-content iframe { height: 70vh; }
+    .timeline { width: calc(100% - 2rem); margin: 0 1rem 3rem; padding: 1.5rem 0; }
+    .timeline::after { left: 8px; }
+    .container, .container.right { left: 0; width: 100%; padding: 0 0 1.25rem 2rem; }
+    .container::after, .container.right::after { top: 1.3rem; right: auto; left: 0; }
+    .container::before, .container.right::before {
+        top: 1.25rem;
+        right: auto;
+        left: 1.4rem;
+        border: 10px solid transparent;
+        border-right-color: var(--paper);
+        border-left: 0;
     }
-
-    .infobox h1 {
-        margin-left: 10px;
-    }
-
-    .text {
-        margin: 15px;
-        flex: 0;
-    }
-
-    .shaddow {
-        filter: drop-shadow(3px 3px 1px #222);
-    }
-    /*Tidslinje*/
-
-    /* The actual timeline (the vertical ruler) */
-    .timeline {
-        position: relative; left: 0; top: 0; bottom: 0; right: 0;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-
-    /* The actual timeline (the vertical ruler) */
-    .timeline::after {
-        content: '';
-        position: fixed;
-        width: 6px;
-        background-color: white;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        margin-left: -3px;
-    }
-
-    /* Container around content */
-    .container {
-        padding: 0px 0px; top: 40px;
-        position: relative;
-        background-color: inherit;
-        width: 50%;
-    }
-
-    /* The circles on the timeline */
-    .container::after {
-        content: '';
-        position: absolute;
-        width: 25px;
-        height: 25px;
-        right: -17px;
-        background-color: white;
-        border: 4px solid #FF9F55;
-        top: 15px;
-        border-radius: 50%;
-        z-index: 1;
-    }
-
-    /* Place the container to the left */
-    .left {
-        left: 0;
-        padding-right: 20px;
-    }
-
-    /* Place the container to the right */
-    .right {
-        left: 50%;
-        padding-left: 20px;
-    }
-
-    /* Add arrows to the left container (pointing right) */
-    .left::before {
-        content: " ";
-        height: 0;
-        position: absolute;
-        top: 22px;
-        width: 0;
-        z-index: 1;
-        right: 10px;
-        border: medium solid white;
-        border-width: 10px 0 10px 10px;
-        border-color: transparent transparent transparent white;
-    }
-
-    /* Add arrows to the right container (pointing left) */
-    .right::before {
-        content: " ";
-        height: 0;
-        position: absolute;
-        top: 22px;
-        width: 0;
-        z-index: 1;
-        left: 10px;
-        border: medium solid white;
-        border-width: 10px 10px 10px 0;
-        border-color: transparent white transparent transparent;
-    }
-
-    /* Fix the circle for containers on the right side */
-    .right::after {
-        left: -16px;
-    }
-
-    /* The actual content */
-    .content {
-        padding: 20px 30px;
-        background-color: white;
-        position: relative;
-        border-radius: 6px;
-        font-family: "Roboto", sans-serif;
-        font-weight: 500;
-        font-style: normal;
-    }
-
-    .github-button {
-        display: block;
-        padding: 20px 20px;
-        width: 80%;
-        font-weight: bold;
-        color: white;
-        background-color: #333;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        text-align: center;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        justify-content: center;
-        align-items: center;
-        margin: 20px auto;
-    }
-
-    .dropdown {
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        margin: 5px;
-        font-family: "Roboto", sans-serif;
-        font-size: 8px;
-        font-weight: 500;
-        font-style: normal;
-        line-height: 10px;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: relative;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        width: 100%;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
-
-    .dropdown-content pre {
-        margin: 0;
-        border-radius: 10px;
-        padding: 10px;
-        background-color: #ffe479;
-    }
-
-    .dropdown button {
-        background-color: rgb(255, 221, 62);
-        color: black;
-        outline: 1px solid black;
-        border-radius: 10px;
-        padding: 16px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        width: 100%; /* Make the button take the full width */
-        text-align: left; /* Align text to the left */
-        position: relative; /* Required for positioning the triangle */
-    }
-
-    .dropdown button:after {
-        content: ' ▼';
-        font-size: 12px;
-        position: absolute;
-        right: 16px; /* Position the triangle on the right side */
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .dropdown button.active:after {
-        content: ' ▲';
-        font-size: 12px;
-        position: absolute;
-        right: 16px; /* Position the triangle on the right side */
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .topbox {
-        display: flex;           /* Makes the container a flex container */ /* Vertically align the text with the image */
-        margin: 4% auto;
-    }
-
-    .midbox {
-        display: flex;           /* Makes the container a flex container */ /* Vertically align the text with the image */
-        margin: 2% auto;
-    }
-
-    .bottomBox {
-        display: flex;           /* Makes the container a flex container */
-        margin: 20% auto;
-    }
+    .content { padding: 1.25rem; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
